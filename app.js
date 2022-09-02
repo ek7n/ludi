@@ -57,7 +57,7 @@ app.use(
     resave: true,
     saveUninitialized: false,
     store: MongoStore.create({
-      mongoUrl: process.env.MONGO_LOCAL,
+      mongoUrl: process.env.MONGO_URI,
     }),
   })
 );
