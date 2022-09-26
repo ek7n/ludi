@@ -24,6 +24,24 @@ const getAllDoctors = async (req, res)=>{
     
 };
 
+const getBasicDoctorInfo = async (req, res)=>{
+   
+    console.log(req.body)
+    
+    const doctorInfo = await User
+    .find({role:"DOCTOR"})
+    .select('name surname photoId doctorAppointmentDays title field')
+    
+
+    res.status(200)
+    .json({
+        success : true,
+        data :  doctorInfo
+    });
+    
+    
+};
+
 
 
 const addAppointmentDays = async (req,res)=>{
@@ -145,7 +163,8 @@ module.exports = {
     getPatientsByDoctor,
     addAppointmentDays,
     setDoctorAvailable,
-    setMeetingDuration
+    setMeetingDuration,
+    getBasicDoctorInfo
     
 
 };

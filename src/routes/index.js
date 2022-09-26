@@ -39,6 +39,8 @@ router.get("/doctor-patient-meetings/:patientId/:doctorId", catchErrors(visitCon
 
 router.get("/doctors", catchErrors(doctorController.getAllDoctors));
 
+router.get("/doctor-info", catchErrors(doctorController.getBasicDoctorInfo));
+
 router.get("/rooms", catchErrors(visitController.getRooms));
 
 router.get(
