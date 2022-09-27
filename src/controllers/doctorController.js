@@ -24,7 +24,7 @@ const getAllDoctors = async (req, res)=>{
     
 };
 
-const getBasicDoctorInfo = async (req, res)=>{
+/* const getBasicDoctorInfo = async (req, res)=>{
    
     console.log(req.body)
     
@@ -40,7 +40,7 @@ const getBasicDoctorInfo = async (req, res)=>{
     });
     
     
-};
+}; */
 
 
 

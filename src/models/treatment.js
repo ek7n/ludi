@@ -7,7 +7,7 @@ const TreatmentSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: "User",
     },
-    treatmentType: ["INSULIN","ORAL ANTIDIYABETIK"], 
+    treatmentType: ["INSULIN","ORAL ANTIDIYABETIK"/* ,"INSULIN,ORAL ANTIDIYABETIK" */], 
     dose: {
      type:Array   
     },
