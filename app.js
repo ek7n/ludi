@@ -40,7 +40,7 @@ app.use(morgan("tiny"));
 
 app.use(cors(
   {
-    "origin": process.env.ORIGIN || process.env.ORIGIN_DOMAIN /* "http://localhost:8080" */,
+    "origin": process.env.ORIGIN || process.env.ORIGIN_DOMAIN /* "http://localhost:8080" *//* "*" */,
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS",
     "preflightContinue": true,
     "optionsSuccessStatus": 200
