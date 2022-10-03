@@ -164,7 +164,7 @@ module.exports = {
     addAppointmentDays,
     setDoctorAvailable,
     setMeetingDuration,
-    getBasicDoctorInfo
+    /* getBasicDoctorInfo */
     
 
 };
