@@ -7,16 +7,54 @@ const TreatmentSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: "User",
     },
-
-    treatmentType: ["INSULIN","ORAL ANTIDIYABETIK"/* ,"INSULIN,ORAL ANTIDIYABETIK" */], 
+    
+    treatmentType: {
+        default:null,
+        type: String,
+        trim: true,
+       enum: ["INSULIN","ORAL ANTIDIYABETIK"/* ,"INSULIN,ORAL ANTIDIYABETIK" */],
+    } ,
 
     /* treatmentType: ["INSULIN","ORAL ANTIDIYABETIK","INSULIN,ORAL ANTIDIYABETIK"],  */
 
     dose: {
-     type:Array   
+     type:Array,
+     default:[]   
     },
     remind: Boolean,
-    time: Number
+    time: Number,
+    regime:{
+        type:Array,
+        default:[]   
+       },
+        eye:{
+        type:Array,
+        default:[]   
+       },
+       brain:{
+        type:Array,
+        default:[]   
+       },
+        kidney:{
+        type:Array,
+        default:[]   
+       },
+       heart:{
+        type:Array,
+        default:[]   
+       },
+       hypoglycemic:{
+        type:Array,
+        default:[]   
+       },
+       ketoasidoz:{
+        type:Array,
+        default:[]   
+       },
+       tromboz:{
+        type:Array,
+        default:[]   
+       },
     
 
 

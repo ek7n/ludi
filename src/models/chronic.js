@@ -7,7 +7,8 @@ const ChronicsSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: "User",
     },
-    value:String
+    value:String,
+   parent:String
     
 
 

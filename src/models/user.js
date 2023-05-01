@@ -2,8 +2,8 @@ const mongoose = require('mongoose')
 mongoose.Promise = global.Promise;
 const md5 = require('md5');
 const passportLocalMongoose = require('passport-local-mongoose')
-const Schema = mongoose.Schema;
-const Room = require('../models/room')
+/* const Schema = mongoose.Schema;
+const Room = require('../models/room') */
 
 const UserSchema = new mongoose.Schema({
     name: {
@@ -61,6 +61,18 @@ const UserSchema = new mongoose.Schema({
         trim: true,
         enum:['DOCTOR', 'PATIENT', 'RELATIVE','ADMIN']
     } ,
+    gender: {
+        type: String,
+        required: true,
+        trim: true,
+        enum:['MALE', 'FEMALE']
+    } ,
+    field: {
+        type: String,
+        
+        trim: true,
+        enum:['Endokrinoloji', 'İç hastalıkları']
+    } ,
     age: { 
         type: Number,
         min: 18,
@@ -78,19 +90,25 @@ const UserSchema = new mongoose.Schema({
     },
     notes: {
         type : Array ,
-        "default" : [{
+        "default" : [
+    /*         {
             type:mongoose.SchemaTypes.ObjectId,
             ref: 'Note',
             autopopulate: {
                 maxDepth: 1
             }
-        }]
+        } */
+    ]
     },
     chronics: {
         type : Array ,
         "default" : []
     },
     drugs: {
+        type : Array ,
+        "default" : []
+    },
+    doctorAbout: {
         type : Array ,
         "default" : []
     },

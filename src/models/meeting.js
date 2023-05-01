@@ -53,18 +53,59 @@ const MeetingSchema = new mongoose.Schema({
         type: Number,
         "default": 20
     },
-    outcome: {
-        type: String,
-        default:''
+    outcomes: {
+        type : Array ,
+        "default" : [] 
+    },
+    suggestions: {
+        type : Array ,
+        "default" : [] 
+    },
+    icd: {
+        type : Array ,
+        "default" : [] 
+    },
+
+    instructions: {
+        type : Array ,
+        "default" : [] 
     },
     isFinalized:{
         type: Boolean,
         default: false
     },
+    isCancelled:{
+        type: Boolean,
+        default: false
+    },
+    cancelledAt:{
+        type: Date,
+        default: null
+    },
+    cancelledBy:{
+        type: String,
+        enum:["DOCTOR","PATIENT","ADMIN"]
+    },
+    confirmedAt:{
+        type: Date,
+        default: null
+    },
+    confirmedBy:{
+        type: String,
+        enum:["DOCTOR","ADMIN"]
+    },
     roomName: {
         type: String,
         default:''
     },
+    isConfirmed: {
+        type: Boolean,
+        default: false
+    },
+    labTests:{
+        type:Array,
+        "default":[]
+    }
     
 },
 {timestamps: true}

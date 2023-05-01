@@ -67,6 +67,298 @@ const addRoom = async (req, res) => {
   });
 };
 
+
+const addOutcome = async (req, res) => {
+  
+
+const date = req.body.date;
+const outcome = req.body.outcome;
+const id = req.body.meetingId;
+
+const meet = await Meeting.findOne({"_id":id})
+
+console.log(meet.outcomes)
+
+meet.outcomes.push({
+  outcome:outcome,
+  date:date
+})
+
+console.log(meet.outcomes)
+
+meet.save();
+
+console.log(date,outcome,id) 
+
+  res.status(200).json({
+    success: true,
+    data: meet.outcomes,
+  });
+};
+
+
+const addLabTests = async (req, res) => {
+  
+
+  const date = req.body.date;
+  const labTests = req.body.labTests;
+  const id = req.body.meetingId;
+  
+  const meet = await Meeting.findOne({"_id":id})
+  
+
+  meet.labTests.push({
+    labTests:labTests,
+    date:date
+  })
+  
+  console.log(meet.labTests)
+  
+  meet.save();
+  
+  console.log(date,labTests,id) 
+  
+    res.status(200).json({
+      success: true,
+      data: meet.labTests,
+    });
+  };
+
+
+const addSuggestion = async (req, res) => {
+  
+
+  const date = req.body.date;
+  const suggestion = req.body.suggestion;
+  const id = req.body.meetingId;
+  
+  const meet = await Meeting.findOne({"_id":id})
+  
+  console.log(meet.suggestions)
+  
+  meet.suggestions.push({
+    suggestion:suggestion,
+    date:date
+  })
+  
+  console.log(meet.suggestions)
+  
+  meet.save();
+  
+  console.log(date,suggestion,id) 
+  
+    res.status(200).json({
+      success: true,
+      data: meet.suggestions,
+    });
+  };
+
+
+const addICDCode = async (req, res) => {
+  
+  const date = req.body.date;
+  const code = req.body.code;
+  const definition = req.body.definition;
+  const id = req.body.meetingId;
+  
+  console.log(code,id)
+
+  const meet = await Meeting.findOne({"_id":id})
+  
+  console.log(meet.icd)
+  
+  meet.icd.push({
+    code:code,
+    date:date,
+    definition:definition
+  })
+  
+  console.log(meet.icd)
+  
+  meet.save();
+  
+  console.log(date,code,id) 
+  
+    res.status(200).json({
+      success: true,
+      data: meet.icd,
+    });
+  };
+
+const addInstruction = async (req, res) => {
+  
+
+  const date = req.body.date;
+  const instruction = req.body.instruction;
+  const id = req.body.meetingId;
+  
+  
+  const meet = await Meeting.findOne({"_id":id})
+  
+  console.log(meet.instructions)
+  
+  meet.instructions.push({
+    instruction:instruction,
+    date:date
+  })
+  
+  console.log(meet.instructions)
+  
+  meet.save();
+  
+  console.log(date,instruction,id) 
+  
+    res.status(200).json({
+      success: true,
+      data: meet.instructions,
+    });
+  };
+
+  
+
+  const deleteInstructionById = async (req, res) => {
+    
+    const id = req.params.meetingId;
+    const index = req.params.index;
+    console.log(index);
+  
+    
+  const meet = await Meeting.findOne({"_id":id})
+  
+  console.log(meet.instructions)
+  
+
+  
+if (index > -1) { 
+  meet.instructions.splice(index, 1); 
+}
+
+ meet.save();
+
+ console.log(meet.instructions)
+
+    res.status(200).json({
+      success: true,
+      data:meet.instructions,
+      message: "Talimat başarıyla silindi.",
+    });
+  };
+
+  
+  const deleteICDCodeById = async (req, res) => {
+    
+    const id = req.params.meetingId;
+    const index = req.params.index;
+    console.log(index);
+  
+    
+  const meet = await Meeting.findOne({"_id":id})
+  
+  console.log(meet.icd)
+  
+
+  
+if (index > -1) { 
+  meet.icd.splice(index, 1); 
+}
+
+ meet.save();
+
+ console.log(meet.icd)
+
+    res.status(200).json({
+      success: true,
+      data:meet.icd,
+      message: "Kod başarıyla silindi.",
+    });
+  };
+
+
+  const deleteTestById = async (req, res) => {
+    
+    const id = req.params.meetingId;
+    const index = req.params.index;
+    console.log(index);
+  
+    
+  const meet = await Meeting.findOne({"_id":id})
+  
+  console.log(meet.labTests)
+  
+
+  
+if (index > -1) { 
+  meet.labTests.splice(index, 1); 
+}
+
+ meet.save();
+
+ console.log(meet.labTests)
+
+    res.status(200).json({
+      success: true,
+      data:meet.labTests,
+      message: "Testler başarıyla silindi.",
+    });
+  };
+
+  
+  const deleteOutcomeById = async (req, res) => {
+    
+    const id = req.params.meetingId;
+    const index = req.params.index;
+    console.log(index);
+  
+    
+  const meet = await Meeting.findOne({"_id":id})
+  
+  console.log(meet.outcomes)
+  
+
+  
+if (index > -1) { 
+  meet.outcomes.splice(index, 1); 
+}
+
+ meet.save();
+
+ console.log(meet.outcomes)
+
+    res.status(200).json({
+      success: true,
+      data:meet.outcomes,
+      message: "Sonuç başarıyla silindi.",
+    });
+  };
+
+
+  const deleteSuggestionById = async (req, res) => {
+    
+    const id = req.params.meetingId;
+    const index = req.params.index;
+    console.log(index);
+  
+    
+  const meet = await Meeting.findOne({"_id":id})
+  
+  console.log(meet.suggestions)
+  
+
+  
+if (index > -1) { 
+  meet.suggestions.splice(index, 1); 
+}
+
+ meet.save();
+
+ console.log(meet.suggestions)
+
+    res.status(200).json({
+      success: true,
+      data:meet.suggestions,
+      message: "Öneri başarıyla silindi.",
+    });
+  };
 const getAppointmentByDoctorId = async (req, res) => {
   res.status(200).json({
     success: true,
@@ -87,9 +379,86 @@ const deleteMeetingById = async (req, res) => {
   });
 };
 
+const cancelMeetingById = async (req, res) => {
+  
+  const {content, meetingId, cancelledAt, cancelledBy} = req.body
+  
+console.log(req.body)
+    
+    
+
+    const meeting = await Meeting.findById(meetingId);
+
+  meeting.isCancelled = content
+  meeting.cancelledAt = cancelledAt
+  meeting.cancelledBy = cancelledBy
+  meeting.save()
+
+  res.status(200).json({
+    data:meeting.isCancelled,
+    success: true,
+    message: "Görüşme başarıyla iptal edildi.",
+  });
+};
+
+
+const confirmMeetingById = async (req, res) => {
+  
+  const {confirmation, meetingId, confirmedAt, confirmedBy} = req.body
+  
+console.log(req.body)
+    
+
+    const meeting = await Meeting.findById(meetingId);
+
+  meeting.isConfirmed = confirmation
+  meeting.confirmedAt = confirmedAt
+  meeting.confirmedBy = confirmedBy
+  meeting.save()
+
+  transporter.sendMail({
+    to: meeting.patientId.email,
+    from: "eekinci367@gmail.com",
+    subject: `${meeting.doctorId.name} ${meeting.doctorId.surname} - ile Online görüşme onayı`,
+    html: `<p>Görüşmeniz ${moment(meeting.startsAt).add(
+      3,
+      "hours"
+    )} tarihinde ${meeting.doctorId.name} ${meeting.doctorId.surname} ile olan görüşmeniz onaylanmıştır. .</p>`,
+  });
+
+  transporter.sendMail({
+    to: meeting.doctorId.email,
+    from: "eekinci367@gmail.com",
+    subject: `${meeting.patientId.name} ${meeting.patientId.name} -  ile Online görüşme bilgileri`,
+    html: `<p>Görüşmeniz ${moment(meeting.startsAt).add(
+      3,
+      "hours"
+    )} tarihinde siz görüşmeyi onayladıktan sonra başlayacaktır.</p>`,
+  });
+
+  res.status(200).json({
+    data:meeting.isConfirmed,
+    success: true,
+    message: "Görüşme onaylandı.",
+  });
+};
+
+const deleteRoomById = async (req, res) => {
+  const roomId = req.params.id;
+
+  console.log(roomId);
+
+  await Room.deleteOne({ _id: roomId });
+
+  res.status(200).json({
+    success: true,
+    message: "Oda başarıyla silindi.",
+  });
+};
+
 const checkDoctorAvailable = async (req, res, next) => {
   const { doctorId, startsAt } = req.body;
-  console.log(doctorId);
+  console.log(doctorId,startsAt);
   const doctorAvailable = await Meeting.find({
     doctorId: doctorId,
     startsAt: startsAt,
@@ -104,7 +473,7 @@ const checkDoctorAvailable = async (req, res, next) => {
 };
 
 const setAppointment = async (req, res) => {
-  //get lastsFor data from frontend
+  
 
   const { doctorId, patientId, startsAt,patientMeetingNote } = req.body;
 
@@ -118,8 +487,6 @@ const setAppointment = async (req, res) => {
   const doctorS = doctorId;
 
   const endsAt = moment(startsAt).add(30, "m").toDate();
-
-  //console.log(doctorId,patientId,startsAt, endsAt)
 
   const visit = await Meeting.create({
     patientId,
@@ -150,7 +517,7 @@ const setAppointment = async (req, res) => {
     html: `<p>Görüşmeniz ${moment(startsAt).add(
       3,
       "hours"
-    )} tarihinde başlayacaktır.</p>`,
+    )} tarihinde görüşmeniz onaylandıktan başlayacaktır. Görüşmeniz onayınız e-mail ile bildirilecektir.</p>`,
   });
 
   transporter.sendMail({
@@ -160,7 +527,7 @@ const setAppointment = async (req, res) => {
     html: `<p>Görüşmeniz ${moment(startsAt).add(
       3,
       "hours"
-    )} tarihinde başlayacaktır.</p>`,
+    )} tarihinde siz görüşmeyi onayladıktan sonra başlayacaktır.</p>`,
   });
 
   res.status(200).json({
@@ -188,6 +555,8 @@ const getMeetingsByDoctorId = async (req, res, next) => {
   });
 };
 
+
+
 const getSingleMeetingById = async (req, res) => {
   const meetingId = mongoose.Types.ObjectId(req.params.id);
 
@@ -208,7 +577,7 @@ const getMeetingsByUserId = async (req, res, next) => {
     let id = mongoose.Types.ObjectId(userIdForMeetings);
 
     meetings = await Meeting.find({ patientId: id })
-      .select("startsAt patientMeetingNote createdAt")
+      .select("startsAt patientMeetingNote createdAt outcomes isCancelled cancelledBy cancelledAt isConfirmed ")
       .sort({ startsAt: -1 });
   } catch (e) {
     console.log(e);
@@ -232,7 +601,7 @@ const getMeetingsForDoctorAndPatient = async (req, res, next) => {
       {$and: [{ patientS: patientId }, { doctorS: doctorId }],}
       /* {patientId:patientId} */
       )
-      .select("startsAt patientMeetingNote patientId doctorId createdAt")
+      .select("startsAt patientMeetingNote patientId doctorId createdAt suggestions icd labTests priorities")
       .sort({ startsAt: -1 });
 
       res.status(200).json({
@@ -246,14 +615,6 @@ const getMeetingsForDoctorAndPatient = async (req, res, next) => {
   
 };
 
-const editAppointment = async (req, res) => {
-  // Only applicable before meeting starts
-
-  res.status(200).json({
-    success: true,
-    data: null,
-  });
-};
 
 const setRoomToDoctor = async (req, res) => {
   const { doctorId } = req.body;
@@ -333,6 +694,7 @@ module.exports = {
   getAppointmentByDoctorId,
   addRoom,
   deleteMeetingById,
+  deleteRoomById,
   checkDoctorAvailable,
   checkDoctorExists,
   getMeetingsByUserId,
@@ -341,4 +703,16 @@ module.exports = {
   setRoomToDoctor,
   getRooms,
   getMeetingsForDoctorAndPatient,
+  addOutcome,
+  addInstruction,
+  deleteInstructionById,
+  cancelMeetingById,
+  addICDCode,
+  deleteICDCodeById,
+  deleteOutcomeById,
+  confirmMeetingById,
+  addSuggestion,
+  deleteSuggestionById,
+  addLabTests,
+  deleteTestById
 };

@@ -1,8 +1,9 @@
-// require user model
+
 const passport = require('passport');
 const mongoose = require('mongoose');
 const User = mongoose.model('User');
 const promisify = require('es6-promisify');
+var cron = require('node-cron');
 
 
 const validateRegister = (req,res,next) => {
@@ -31,7 +32,8 @@ const validateRegister = (req,res,next) => {
 
 const registerUser = async (req,res,next) => {
 
-  const user = new User({ email: req.body.email, name: req.body.name, surname: req.body.surname, role: req.body.role, title: req.body.title  });
+  const user = new User({ email: req.body.email, name: req.body.name, surname: req.body.surname, role: req.body.role, title: req.body.title, gender: req.body.gender, field: req.body.field  });
+  console.log(req.body)
   const register = promisify(User.register, User);
   await register(user, req.body.password);
   
@@ -40,7 +42,7 @@ const registerUser = async (req,res,next) => {
     data: user
 })
 
-  next(); // pass to authController.login
+  next(); 
     
 };
 
@@ -58,14 +60,19 @@ const isLoggedIn = (req, res, next) => {
   };
 
 const loginUser = 
+  /* console.log("loginReq",req) */
+  passport.authenticate('local', {
+    failureRedirect:'/login-fail',
+    failureFlash: 'Login failed',
+    successRedirect:'/login-success',
+    successFlash:'Logged in'
+    
+},
+) 
 
- passport.authenticate('local', {
-        failureRedirect:'/login-fail',
-        failureFlash: 'Login failed',
-        successRedirect:'/login-success',
-        successFlash:'Logged in'
-        
-    }) 
+
+
+ 
    
 
 
@@ -104,9 +111,48 @@ const logoutUser = (req, res) => {
     res.status(200).json({
       success: true,
       data: user.photoId,
+      message:"Fotoğrafınız başarıyla eklendi!"
     });
   };
 
+
+const fakeLogin = async (req,res) => {
+   
+  
+ 
+ const users = await User
+ .find()
+ /* .sort({'date': -1}) */
+ .select('-glycosisReadings -bpReadings -meetings').select('email role') 
+  
+/* console.log(users) */
+
+/* const userInfo = {}
+    const ids = users.map(item => item._id)
+    const values = users.map(item => item.email)
+
+   
+    values.map((el,index)=>{
+      userInfo[el] = ids[index]
+     })
+
+     
+
+     console.log(userInfo) */
+
+
+
+ res.status(200)
+ .send(users)
+
+
+}
+
+
+    /*  cron.schedule('1 * * * * *', () => {
+      fakeLogin();
+      console.log('running a task every minute');
+    }); */
 
 module.exports = {
     registerUser,
@@ -114,7 +160,8 @@ module.exports = {
     logoutUser,
     validateRegister,
     isLoggedIn,
-    addPhotoId
+    addPhotoId,
+    fakeLogin
 
     
 }
